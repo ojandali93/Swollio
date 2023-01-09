@@ -7,10 +7,6 @@ const Navbar = (props) => {
   const {setScreen} = props
   const auth = getAuth()
 
-  useEffect(() => {
-    auth.currentUser ? setScreen('home') : setScreen('login')
-  })
-
   const logout = () => {
     signOut(auth)
       .then(() => {
@@ -22,11 +18,15 @@ const Navbar = (props) => {
   }
   return (
     <div className='nav'>
-      <div className='left-nav'>
-        <img className='logo' src={logo} alt='swollio logo' />
-      </div>
-      <div className='right-nav'>
-        <h3 onClick={() => {logout()}}>Logout</h3>
+      <div className='navbar'>
+        <div className='left-nav'>
+          <img className='logo' src={logo} alt='swollio logo' />
+        </div>
+        <div className='right-nav'>
+          {
+            auth.currentUser ? <h3 onClick={() => {logout()}}>Logout</h3> : null
+          }
+        </div>
       </div>
     </div>
   )

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
+import '../static/SignIn.css'
 import { signInWithEmailAndPassword, getAuth } from 'firebase/auth'
 import {auth, db} from '../firebase.js'
 
@@ -26,32 +27,34 @@ const Signin = (props) => {
   }
 
   return (
-    <div>
-      <div>
-        <p>Welcome to Sollio!</p>
-        <p>Login below:</p>
-      </div>
-      <div>
-        <form>
-          <div>
-            <label>Email: </label>
-            <input onChange={(e) => {setEmail(e.target.value)}} type='email' name='email' placeholder='email'/>
-          </div>
-          <div>
-            <label>Password:</label>
-            <input onChange={(e) => {setPassword(e.target.value)}} type='password' name='password' placeholder='password'/>
-          </div>
-          <div>
-            <div onClick={() => {submitLogin()}}>
-              <p>Submit</p>
+    <div className='content'>
+      <div className='signin-section'>
+        <div>
+          <p className='welcome'>Welcome to Swollio!</p>
+          <p className='login'>Login below:</p>
+        </div>
+        <div>
+          <form className='form'>
+            <div className='form-section'>
+              <label>Email: </label>
+              <input className='input' onChange={(e) => {setEmail(e.target.value)}} type='email' name='email' placeholder='name@example.com'/>
             </div>
-          </div>
-          <div>
-            <div onClick={() => {setScreen('signup')}}>
-              <p>Register Account</p>
+            <div className='form-section'>
+              <label>Password:</label>
+              <input className='input' onChange={(e) => {setPassword(e.target.value)}} type='password' name='password' placeholder='password'/>
             </div>
-          </div>
-        </form>
+            <div>
+              <div className='submit-button' onClick={() => {submitLogin()}}>
+                <p className='submit-text'>Submit</p>
+              </div>
+            </div>
+            <div>
+              <div onClick={() => {setScreen('signup')}}>
+                <p className='register'>Create Account</p>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )

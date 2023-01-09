@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
+import '../static/AddWorkout.css'
 import { getAuth } from 'firebase/auth'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { auth, db } from '../firebase'
@@ -61,82 +62,85 @@ const AddWorkout = (props) => {
   }
 
   return (
-    <div>
-      <div>
-        New Workout
-      </div>
-      <div>
-        <form>
-          <div>
-            <label>Day of the week</label>
-            <select value={dayOfTheWeek} onChange={(e) => {setDayOfTheWeek(e.target.value)}}>
-              <option value="Sunday">Sunday</option>
-              <option value="Monday">Monday</option>
-              <option value="Tuesday">Tuesday</option>
-              <option value="Wednesday">Wednesday</option>
-              <option value="Thursday">Thursday</option>
-              <option value="Friday">Friday</option>
-              <option value="Saturday">Saturday</option>
-            </select>
-          </div>
-          <br></br>
-          <div>Workout:</div>
-          <br></br>
-          <div>
-            <div>
-              <label>Exercise</label>
-              <input onChange={(e) => {setExercise(e.target.value)}} type='text' name='exercise'/>
-            </div>
-            <div>
-              <label>Reps</label>
-              <input onChange={(e) => {setReps(e.target.value)}} type='text' name='reps'/>
-            </div>
-            <div>
-              <label>Sets</label>
-              <input onChange={(e) => {setSets(e.target.value)}} type='text' name='sets'/>
-            </div>
-            <div>
-              <label>Intensity</label>
-              <input onChange={(e) => {setIntensity(e.target.value)}} type='text' name='intensity'/>
-            </div>
-            <div onClick={() => {addExercise()}}>
-              <p>Add Exercise</p>
-            </div>
-          </div>
-        </form>
+    <div className='new-workout-content'>
+      <div className='new-w-section'>
+        <div  className='new-header'>
+          New Workout
+        </div>
+        <div className='breaker'></div>
         <div>
+          <form>
+            <div>
+              <label>Day of the week</label>
+              <select value={dayOfTheWeek} onChange={(e) => {setDayOfTheWeek(e.target.value)}}>
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+              </select>
+            </div>
+            <br></br>
+            <div>Workout:</div>
+            <br></br>
+            <div>
+              <div>
+                <label>Exercise</label>
+                <input onChange={(e) => {setExercise(e.target.value)}} type='text' name='exercise'/>
+              </div>
+              <div>
+                <label>Reps</label>
+                <input onChange={(e) => {setReps(e.target.value)}} type='text' name='reps'/>
+              </div>
+              <div>
+                <label>Sets</label>
+                <input onChange={(e) => {setSets(e.target.value)}} type='text' name='sets'/>
+              </div>
+              <div>
+                <label>Intensity</label>
+                <input onChange={(e) => {setIntensity(e.target.value)}} type='text' name='intensity'/>
+              </div>
+              <div onClick={() => {addExercise()}}>
+                <p>Add Exercise</p>
+              </div>
+            </div>
+          </form>
           <div>
-            Workout View:
-          </div>
-          <div>
-            {
-              exerciseList.map((exercise, index) => {
-                return(
-                  <div key={index}>
-                    <div>
-                      Exercise: {exercise.exercise}
+            <div>
+              Workout View:
+            </div>
+            <div>
+              {
+                exerciseList.map((exercise, index) => {
+                  return(
+                    <div key={index}>
+                      <div>
+                        Exercise: {exercise.exercise}
+                      </div>
+                      <div>
+                        Reps: {exercise.reps}
+                      </div>
+                      <div>
+                        Sets: {exercise.sets}
+                      </div>
+                      <div>
+                        Intensity: {exercise.intensity}
+                      </div>
+                      <div onClick={() => {removeExercise(index)}}>
+                        <p>Remove Exercise</p>
+                      </div>
                     </div>
-                    <div>
-                      Reps: {exercise.reps}
-                    </div>
-                    <div>
-                      Sets: {exercise.sets}
-                    </div>
-                    <div>
-                      Intensity: {exercise.intensity}
-                    </div>
-                    <div onClick={() => {removeExercise(index)}}>
-                      <p>Remove Exercise</p>
-                    </div>
-                  </div>
-                )
-              })
-            }
+                  )
+                })
+              }
+            </div>
           </div>
         </div>
-      </div>
-      <div onClick={() => {storeWorkout()}}>
-        Add Workout
+        <div onClick={() => {storeWorkout()}}>
+          Add Workout
+        </div>
       </div>
     </div>
   )

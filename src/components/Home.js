@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 
+import '../static/Home.css'
+
 import { getAuth } from 'firebase/auth'
 
 import Workouts from './Workouts.js'
@@ -10,15 +12,16 @@ const Home = (props) => {
 
   useEffect(() => {
     auth.currentUser ? setScreen('home') : setScreen('login')
-  })
+  }, [])
 
   return (
-    <div>
+    <div className='home-content'>
+      <div className='header'>Workouts</div>
       <div>
         <Workouts setScreen={setScreen}/>
       </div>
       <div onClick={() => {setScreen('addWorkout')}}>
-        <p>+ Add Workout</p>
+        <p className='add-workout-buttom'>+ Add Workout</p>
       </div>
     </div>
   )
